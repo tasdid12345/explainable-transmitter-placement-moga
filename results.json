@@ -1,0 +1,29 @@
+{
+  "question": "Can a sensitivity-guided variable-length genetic search with per-site coverage and cost attributions find a better coverage-cost trade-off front than a standard variable-length multiobjective GA on a simulated transmitter placement problem?",
+  "method": "Synthetic transmitter placement; both GAs optimise coverage (train demand) vs cost; fronts are re-evaluated on held-out demand points; hypervolume compared over 3 seeds.",
+  "dataset": {
+    "name": "synthetic transmitter placement (400 candidate sites, 1000 demand points, 20x20 grid)",
+    "source_url": "none: generated in-script with numpy (seed 42)",
+    "n_rows": 1000,
+    "n_train": 750,
+    "n_test": 250,
+    "same_as_paper": false,
+    "baseline_is_papers_method": false
+  },
+  "metric_name": "test-set hypervolume of normalised coverage-cost front",
+  "higher_is_better": true,
+  "baseline": "Standard variable-length NSGA-II-style GA (add/remove/swap mutation, one-point crossover on site lists); not a verified re-implementation of the paper's operators.",
+  "improved": "Same GA, population, generations and evaluation budget, plus a population-based site sensitivity (coverage gain per unit cost) that biases add and swap mutations; reports per-site coverage vs cost attributions.",
+  "metrics": {
+    "baseline_score": 0.944009007197902,
+    "improved_score": 0.9577607014773525,
+    "improvement": 0.013751694279450444,
+    "baseline_score_std": 0.01085361910751555,
+    "improved_score_std": 0.008944694405184061,
+    "baseline_dominated_frac": 0.7666666666666666,
+    "improved_dominated_frac": 0.12777777777777777,
+    "baseline_front_size": 60.0,
+    "improved_front_size": 60.0
+  },
+  "notes": "Synthetic instance, so results do not transfer to real deployments. Demand points are split once (75/25) for training and held-out test; test used only for final evaluation. GA settings were fixed a priori, not tuned, so no CV-based selection was needed. Only 3 seeds: std is a rough indication. Dominated fractions are computed on test objectives. Stratification does not apply (no classification labels)."
+}
